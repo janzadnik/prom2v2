@@ -1,11 +1,7 @@
 package ui;
 
 import java.awt.BorderLayout;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -17,6 +13,8 @@ import javax.swing.WindowConstants;
 
 import model.TableModel;
 import model.ToDoItem;
+import rss.RssItem;
+import rss.RssParser;
 
 public class ProFrame extends JFrame {
 
@@ -68,6 +66,23 @@ public class ProFrame extends JFrame {
         pack();
 
         setLocationRelativeTo(null); //center okna na monitoru
+
+        parse();
+    }
+
+
+
+    private void parse(){
+      try {
+          RssParser parser = new RssParser(new FileInputStream(new File("download.xml")));
+
+          List<RssItem> rssItems = parser.parseItems();
+          for (RssItem rssItem : rssItems) {
+              System.out.println(rssItems.toString());
+          }
+      } catch (FileNotFoundException e) {
+          e.printStackTrace();
+      }
     }
 
     private void saveItems() {

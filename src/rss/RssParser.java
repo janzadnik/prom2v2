@@ -34,7 +34,7 @@ public class RssParser {
                         item = new RssItem();
                     }
                     if (qName.equalsIgnoreCase("title") && item!= null ){
-                        link = true;
+                        title = true;
                     }
 
                     if (qName.equalsIgnoreCase("link") && item!= null){
@@ -72,6 +72,9 @@ public class RssParser {
                     super.characters(ch, start, length);
                 }
             };
+
+            saxParser.parse(inputStream, handler);
+
         } catch (Exception e) {
 
         } finally {

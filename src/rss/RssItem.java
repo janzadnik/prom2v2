@@ -31,6 +31,6 @@ public class RssItem {
 
     @Override
     public String toString() {
-        System.out.println(title + " " + link + " " + description);
+       return String.format("%s\n%s\n%s",title,link,description);
     }
 }

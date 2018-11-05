@@ -8,12 +8,7 @@ import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 
 import model.FeedItem;
 import model.TableModel;
@@ -40,46 +35,24 @@ public class ProFrame extends JFrame {
         setTitle("Programování 2");
 
         JPanel toolbar = new JPanel();
-        add(toolbar, BorderLayout.NORTH);
-
-        JButton button = new JButton();
-        button.setText("Přidat poznámku");
-        toolbar.add(button);
-
-        JButton saveButton = new JButton();
-        saveButton.setText("Uložit");
-        toolbar.add(saveButton);
-
-        JButton loadButton = new JButton();
-        loadButton.setText("Načíst");
-        toolbar.add(loadButton);
+        add(toolbar, BorderLayout.EAST);
 
 
         JButton urlButton = new JButton();
         urlButton.setText("Vybrat URL");
         toolbar.add(urlButton);
 
-        button.addActionListener(action -> {
-            ToDoItem item = new ProDialog().getItem();
-            model.add(item);
-        });
+
         urlButton.addActionListener(action -> {
             url = new UrlDialog().getUrl();
             parse();
             addFeed(url);
         });
-        saveButton.addActionListener(action -> {
-            saveItems();
-        });
-        loadButton.addActionListener(action -> {
-            loadItems();
-
-        });
 
         model = new TableModel();
 
         JTable table = new JTable(model);
-        add(new JScrollPane(table), BorderLayout.CENTER);
+        add(new JScrollPane(table), BorderLayout.WEST);
         pack();
 
         setLocationRelativeTo(null); //center okna na monitoru
